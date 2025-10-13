@@ -77,7 +77,7 @@ def calculate_charge(service, distance, hlc_type=None):
 # ------------------------------------------------------
 # User Interface
 # ------------------------------------------------------
-service = st.selectbox("Select Service Type", ["Select", "HDC", "HNV", "HPT", "HLC"])
+service = st.selectbox("Select Service Type", ["Select", "HDC", "HNV", "HLC", "HPT"])
 
 if service != "Select":
     # restrict distance to 15 km max for all
@@ -117,3 +117,4 @@ if service != "Select":
 # ------------------------------------------------------
 st.markdown("---")
 st.caption("Developed by Qurocare Team 💚")
+
