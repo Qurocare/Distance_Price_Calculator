@@ -2,7 +2,7 @@ import streamlit as st
 
 st.set_page_config(page_title="Qurocare Rate Calculator", layout="centered")
 
-st.title("🏥 Qurocare Homecare Service Rate Calculator")
+st.write("### Distance Rate Calculator")  # smaller than st.title()
 st.write("Select a service and distance to calculate the visit rate.")
 
 # ------------------------------------------------------
@@ -20,7 +20,7 @@ def calculate_charge(service, distance, hlc_type=None):
             return 1999
         else:
             extra_km = distance - 10
-            return 1999 + (extra_km * 30)
+            return 1999 + (extra_km * 100)
 
     elif service == "HNV":  # Home Nurse Visit
         if distance <= 3:
@@ -36,15 +36,18 @@ def calculate_charge(service, distance, hlc_type=None):
             return 599 + (extra_km * 30)
 
     elif service == "HPT":  # Home Physiotherapy
-        # Returns a dictionary with three price options
         if distance <= 3:
-            return {"Single": 1000, "Daily Pay": 900, "Upfront Pay": 850}
+            return {"Single": 1000, "Daily Pay": 950, "Upfront Pay": 900}
         elif distance <= 7:
-            return {"Single": 1100, "Daily Pay": 1000, "Upfront Pay": 950}
+            return {"Single": 1100, "Daily Pay": 1050, "Upfront Pay": 1000}
         elif distance <= 12:
-            return {"Single": 1300, "Daily Pay": 1200, "Upfront Pay": 1150}
+            return {"Single": 1300, "Daily Pay": 1250, "Upfront Pay": 1200}
         else:
-            return {"Single": 1500, "Daily Pay": 1400, "Upfront Pay": 1350}
+            return {
+                "Single": 1500,
+                "Daily Pay": "To be decided upon discussion with the management",
+                "Upfront Pay": "To be decided upon discussion with the management"
+            }
 
     elif service == "HLC":  # Home Lab Collection
         if hlc_type == "Regular":
@@ -73,22 +76,19 @@ def calculate_charge(service, distance, hlc_type=None):
             else:
                 return "❌ Service not available beyond 15 km"
 
-
 # ------------------------------------------------------
 # User Interface
 # ------------------------------------------------------
-service = st.selectbox("Select Service Type", ["Select", "HDC", "HNV", "HLC", "HPT"])
+service = st.selectbox("Select Service Type", ["Select", "HDC", "HNV", "HPT", "HLC"])
 
 if service != "Select":
-    # restrict distance to 15 km max for all
     distance = st.slider("Select Distance from Clinic (in km)", 0.0, 15.0, 3.0, 0.5)
-    st.caption("🚗 Service available only up to 15 km from clinic")
-
+    st.caption("🚐 Service available only up to 15 km from clinic")
+    
     if service == "HLC":
         hlc_type = st.radio("Select HLC Category", ["Regular", "Offer"])
         result = calculate_charge(service, distance, hlc_type)
         st.markdown("---")
-
         st.subheader("🧾 Calculated Rate:")
         if isinstance(result, (int, float)):
             st.success(f"**HLC ({hlc_type})** rate for {distance} km: ₹{result:.2f}")
@@ -100,21 +100,17 @@ if service != "Select":
         st.markdown("---")
         st.subheader(f"HPT (Physiotherapy) Rates for {distance} km:")
         st.write(f"• Single Session: ₹{result['Single']}")
-        st.write(f"• Daily Pay (Multiple Days): ₹{result['Daily Pay']}/day")
-        st.write(f"• Upfront Pay (Multiple Days): ₹{result['Upfront Pay']}/day")
+        st.write(f"• Daily Pay (Multiple Days): {result['Daily Pay']}")
+        st.write(f"• Upfront Pay (Multiple Days): {result['Upfront Pay']}")
 
     else:  # HDC and HNV
         result = calculate_charge(service, distance)
         st.markdown("---")
-        st.subheader("Calculated Rate:")
-        if distance > 15:
-            st.error("❌ Service not available beyond 15 km")
-        else:
-            st.success(f"{service} service rate for {distance} km: ₹{result:.2f}")
+        st.subheader("🧾 Calculated Rate:")
+        st.success(f"{service} service rate for {distance} km: ₹{result:.2f}")
 
 # ------------------------------------------------------
 # Footer
 # ------------------------------------------------------
 st.markdown("---")
-st.caption("Developed by Qurocare Team 💚")
-
+st.caption("Developed by Qurocare Team ❤️")
