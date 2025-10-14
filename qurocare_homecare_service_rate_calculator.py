@@ -118,8 +118,8 @@ if service != "Select":
         st.markdown("---")
         st.subheader(f"HPT (Physiotherapy) Rates for {distance} km:")
         success_box(f"Single Session: ₹{result['Single']}")
-        success_box(f"Daily Pay (Multiple Days): {result['Daily Pay']}")
-        success_box(f"Upfront Pay (Multiple Days): {result['Upfront Pay']}")
+        success_box(f"Daily Pay (Package): {result['Daily Pay']}")
+        success_box(f"Upfront Pay (Package): {result['Upfront Pay']}")
 
     else:  # HDC and HNV
         result = calculate_charge(service, distance)
@@ -132,6 +132,7 @@ if service != "Select":
 # ------------------------------------------------------
 st.markdown("---")
 st.caption("Developed by Qurocare Team ❤️")
+
 
 
 
