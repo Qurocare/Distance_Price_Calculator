@@ -2,7 +2,7 @@ import streamlit as st
 
 st.set_page_config(page_title="Qurocare Rate Calculator", layout="centered")
 
-st.write("### Qurocare Distance Rate Calculator")  # smaller than st.title()
+st.write("### Distance Rate Calculator")  # smaller than st.title()
 st.write("Select a service and distance to calculate the visit rate.")
 
 # ------------------------------------------------------
@@ -77,9 +77,27 @@ def calculate_charge(service, distance, hlc_type=None):
                 return "❌ Service not available beyond 15 km"
 
 # ------------------------------------------------------
+# Helper function for green highlighted box
+# ------------------------------------------------------
+def success_box(text):
+    st.markdown(f"""
+        <div style="
+            background-color:#d4edda;
+            color:#155724;
+            padding:10px;
+            border-radius:5px;
+            margin-bottom:5px;
+            font-size:20px;
+            font-weight:bold;
+        ">
+            {text}
+        </div>
+    """, unsafe_allow_html=True)
+
+# ------------------------------------------------------
 # User Interface
 # ------------------------------------------------------
-service = st.selectbox("Select Service Type", ["Select", "HDC", "HNV", "HPT", "HLC"])
+service = st.selectbox("Select Service Type", ["Select", "HDC", "HNV", "HLC", "HPT"])
 
 if service != "Select":
     distance = st.slider("Select Distance from Clinic (in km)", 0.0, 15.0, 3.0, 0.5)
@@ -91,7 +109,7 @@ if service != "Select":
         st.markdown("---")
         st.subheader("🧾 Calculated Rate:")
         if isinstance(result, (int, float)):
-            st.success(f"**HLC ({hlc_type})** rate for {distance} km: ₹{result:.2f}")
+            success_box(f"HLC ({hlc_type}) rate for {distance} km: ₹{result:.2f}")
         else:
             st.error(result)
 
@@ -99,19 +117,18 @@ if service != "Select":
         result = calculate_charge(service, distance)
         st.markdown("---")
         st.subheader(f"HPT (Physiotherapy) Rates for {distance} km:")
-        st.write(f"• Single Session: ₹{result['Single']}")
-        st.write(f"• Daily Pay (Multiple Days): {result['Daily Pay']}")
-        st.write(f"• Upfront Pay (Multiple Days): {result['Upfront Pay']}")
+        success_box(f"Single Session: ₹{result['Single']}")
+        success_box(f"Daily Pay (Multiple Days): {result['Daily Pay']}")
+        success_box(f"Upfront Pay (Multiple Days): {result['Upfront Pay']}")
 
     else:  # HDC and HNV
         result = calculate_charge(service, distance)
         st.markdown("---")
         st.subheader("🧾 Calculated Rate:")
-        st.success(f"{service} service rate for {distance} km: ₹{result:.2f}")
+        success_box(f"{service} service rate for {distance} km: ₹{result:.2f}")
 
 # ------------------------------------------------------
 # Footer
 # ------------------------------------------------------
 st.markdown("---")
 st.caption("Developed by Qurocare Team ❤️")
-
