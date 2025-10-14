@@ -3,7 +3,7 @@ import streamlit as st
 st.set_page_config(page_title="Qurocare Rate Calculator", layout="centered")
 
 st.write("### Distance Rate Calculator")  # smaller than st.title()
-st.write("Select a service and distance to calculate the visit rate.")
+st.write("Select a service and distance to calculate the rate.")
 
 # ------------------------------------------------------
 # Function to calculate charges
@@ -97,7 +97,7 @@ def success_box(text):
 # ------------------------------------------------------
 # User Interface
 # ------------------------------------------------------
-service = st.selectbox("Select Service Type", ["Select", "HDC", "HNV", "HLC", "HPT"])
+service = st.selectbox("Select Service Type", ["Select Service", "HDC", "HNV", "HLC", "HPT"])
 
 if service != "Select":
     distance = st.slider("Select Distance from Clinic (in km)", 0.0, 15.0, 3.0, 0.5)
@@ -132,3 +132,4 @@ if service != "Select":
 # ------------------------------------------------------
 st.markdown("---")
 st.caption("Developed by Qurocare Team ❤️")
+
