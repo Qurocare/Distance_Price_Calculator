@@ -97,7 +97,7 @@ def success_box(text):
 # ------------------------------------------------------
 # User Interface
 # ------------------------------------------------------
-service = st.selectbox("Select Service Type", ["Select Service", "HDC", "HNV", "HLC", "HPT"])
+service = st.selectbox("Select Service Type", ["Select", "HDC", "HNV", "HLC", "HPT"])
 
 if service != "Select":
     distance = st.slider("Select Distance from Clinic (in km)", 0.0, 15.0, 3.0, 0.5)
@@ -132,4 +132,5 @@ if service != "Select":
 # ------------------------------------------------------
 st.markdown("---")
 st.caption("Developed by Qurocare Team ❤️")
+
 
