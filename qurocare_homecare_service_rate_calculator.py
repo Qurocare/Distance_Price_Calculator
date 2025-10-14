@@ -2,7 +2,7 @@ import streamlit as st
 
 st.set_page_config(page_title="Qurocare Rate Calculator", layout="centered")
 
-st.write("### Distance Rate Calculator")  # smaller than st.title()
+st.write("### Qurocare Distance Rate Calculator")  # smaller than st.title()
 st.write("Select a service and distance to calculate the visit rate.")
 
 # ------------------------------------------------------
@@ -114,3 +114,4 @@ if service != "Select":
 # ------------------------------------------------------
 st.markdown("---")
 st.caption("Developed by Qurocare Team ❤️")
+
