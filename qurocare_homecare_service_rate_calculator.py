@@ -45,8 +45,8 @@ def calculate_charge(service, distance, hlc_type=None):
         else:
             return {
                 "Single": 1500,
-                "Daily Pay": "To be decided upon discussion with the management",
-                "Upfront Pay": "To be decided upon discussion with the management"
+                "Daily Pay": "Contact Office",
+                "Upfront Pay": "Contact Office"
             }
 
     elif service == "HLC":  # Home Lab Collection
@@ -132,5 +132,6 @@ if service != "Select":
 # ------------------------------------------------------
 st.markdown("---")
 st.caption("Developed by Qurocare Team ❤️")
+
 
 
