@@ -63,7 +63,7 @@ def calculate_charge(service, distance, hlc_type=None):
                 extra_km = distance - 10
                 return 200 + (extra_km * 50)
             else:
-                return "❌ Service not available beyond 15 km"
+                return "❌ Service not available beyond 20 km, please contact office!"
 
         elif hlc_type == "Offer":
             if distance <= 8:
@@ -74,7 +74,7 @@ def calculate_charge(service, distance, hlc_type=None):
                 extra_km = distance - 10
                 return 99 + (extra_km * 30)
             else:
-                return "❌ Service not available beyond 15 km"
+                return "❌ Service not available beyond 20 km, please contact office!"
 
 # ------------------------------------------------------
 # Helper function for green highlighted box
@@ -100,8 +100,8 @@ def success_box(text):
 service = st.selectbox("Select Service Type", ["Select", "HDC", "HNV", "HLC", "HPT"])
 
 if service != "Select":
-    distance = st.slider("Select Distance from Clinic (in km)", 0.0, 15.0, 3.0, 0.5)
-    st.caption("🚐 Service available only up to 15 km from clinic")
+    distance = st.slider("Select Distance from Clinic (in km)", 0.0, 20.0, 3.0, 0.5)
+    st.caption("🚐 Service available only up to 20 km from clinic. For distances beyond 20 km, please contact the office.")
     
     if service == "HLC":
         hlc_type = st.radio("Select HLC Category", ["Regular", "Offer"])
@@ -132,6 +132,7 @@ if service != "Select":
 # ------------------------------------------------------
 st.markdown("---")
 st.caption("Developed by Qurocare Team ❤️")
+
 
 
 
