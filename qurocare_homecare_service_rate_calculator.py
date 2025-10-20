@@ -33,7 +33,7 @@ def calculate_charge(service, distance, hlc_type=None):
             return 599
         else:
             extra_km = distance - 10
-            return 599 + (extra_km * 30)
+            return 599 + (extra_km * 50)
 
     elif service == "HPT":  # Home Physiotherapy
         if distance <= 3:
@@ -61,7 +61,7 @@ def calculate_charge(service, distance, hlc_type=None):
                 return 200
             elif distance <= 15:
                 extra_km = distance - 10
-                return 200 + (extra_km * 30)
+                return 200 + (extra_km * 50)
             else:
                 return "❌ Service not available beyond 15 km"
 
@@ -132,6 +132,7 @@ if service != "Select":
 # ------------------------------------------------------
 st.markdown("---")
 st.caption("Developed by Qurocare Team ❤️")
+
 
 
 
