@@ -101,7 +101,11 @@ service = st.selectbox("Select Service Type", ["Select", "HDC", "HNV", "HLC", "H
 
 if service != "Select":
     distance = st.slider("Select Distance from Clinic (in km)", 0.0, 20.0, 3.0, 0.5)
-    st.caption("🚐 Service available only up to 20 km from clinic. For distances beyond 20 km, please contact the office.")
+    # Show message only when slider is at or beyond 20 km
+    if distance >= 20:
+        st.warning("📞 For distances beyond 20 km, please contact the office.")
+    else:
+        st.caption("🚐 Service available up to 20 km from the clinic.")
     
     if service == "HLC":
         hlc_type = st.radio("Select HLC Category", ["Regular", "Offer"])
@@ -132,6 +136,7 @@ if service != "Select":
 # ------------------------------------------------------
 st.markdown("---")
 st.caption("Developed by Qurocare Team ❤️")
+
 
 
 
